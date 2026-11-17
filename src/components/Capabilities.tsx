@@ -14,7 +14,7 @@ export default function Capabilities() {
   const { t } = useLanguage();
 
   return (
-    <section id="services" className="cxc-section" style={{ background: '#F9F8FF' }}>
+    <section id="services" className="cxc-section cxc-section-snug-bottom" style={{ background: '#F9F8FF' }}>
       <div className="cxc-wrap">
         <div className="cxc-grid-header">
           <div>

@@ -10,7 +10,10 @@ import {
 } from 'react-icons/hi2';
 import { TbHeadset } from 'react-icons/tb';
 import type { IconType } from 'react-icons';
+import Image from 'next/image';
+import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import LeadFormDialog from '@/components/LeadFormDialog';
 
 const purple = '#7A3AE3';
 const purpleDark = '#5B2589';
@@ -19,6 +22,7 @@ const chipIcons: IconType[] = [HiGift, HiClock, HiShieldCheck, TbHeadset];
 
 export default function Contact() {
   const { t } = useLanguage();
+  const [formOpen, setFormOpen] = useState(false);
 
   return (
     <section id="contact" className="cxc-section" style={{ background: '#F9F9FB' }}>
@@ -103,16 +107,15 @@ export default function Contact() {
               width: '48px',
               height: '48px',
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #8A3FD1, #5B2589)',
+              background: '#fff',
+              border: '1px solid #E6DDF3',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontFamily: "'Sora', sans-serif",
-              fontWeight: 700,
-              fontSize: '16px',
-              color: '#fff',
               flexShrink: 0,
-            }}>CXC</div>
+            }}>
+              <Image src="/assets/cxc-mark.png" alt="CXC Software" width={34} height={13} style={{ width: '34px', height: 'auto', display: 'block' }} />
+            </div>
             <div>
               <div style={{ fontSize: '14px', fontWeight: 700, color: '#16141E' }}>{t.contact.founderTitle}</div>
               <div style={{ fontSize: '13px', color: '#5F5872', marginTop: '2px' }}>{t.contact.founderSub}</div>
@@ -176,23 +179,27 @@ export default function Contact() {
             }}>{t.contact.phone}</a>
           </div>
 
-          <a href={`mailto:${t.contact.email}`} style={{
+          <button type="button" aria-haspopup="dialog" onClick={() => setFormOpen(true)} style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '8px',
             background: purpleDark,
             color: '#fff',
+            fontFamily: 'inherit',
             fontSize: '15px',
             fontWeight: 600,
             padding: '14px 24px',
+            border: 'none',
             borderRadius: '10px',
             marginTop: '24px',
             width: '100%',
+            cursor: 'pointer',
           }}>
             <HiCalendar size={18} aria-hidden />
             {t.contact.cta}
-          </a>
+          </button>
+          <LeadFormDialog open={formOpen} onClose={() => setFormOpen(false)} />
 
           <div style={{
             display: 'flex',

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
+import Link from 'next/link';
 import { HiArrowRight, HiBars3, HiXMark } from 'react-icons/hi2';
 
 export default function Navbar() {
@@ -25,10 +26,10 @@ export default function Navbar() {
   const btnOff: React.CSSProperties = { ...btnBase, background: 'transparent', color: '#8A83A0' };
 
   const links = [
-    { href: '#services', label: t.nav.services },
-    { href: '#industries', label: t.nav.industries },
-    { href: '#method', label: t.nav.method },
-    { href: '#portfolio', label: t.nav.portfolio },
+    { href: '/#services', label: t.nav.services },
+    { href: '/#industries', label: t.nav.industries },
+    { href: '/#method', label: t.nav.method },
+    { href: '/#portfolio', label: t.nav.portfolio },
   ];
 
   const close = () => setOpen(false);
@@ -50,58 +51,62 @@ export default function Navbar() {
         alignItems: 'center',
         gap: '16px',
       }}>
-        <a href="#hero" style={{ display: 'flex', alignItems: 'center' }} onClick={close}>
-          <Image src="/assets/cxc-logo.png" alt="CXC Software" width={120} height={30} style={{ height: '28px', width: 'auto', display: 'block' }} />
-        </a>
+        <div className="cxc-nav-side">
+          <Link href="/#hero" style={{ display: 'flex', alignItems: 'center' }} onClick={close}>
+            <Image src="/assets/cxc-logo-transparent.png" alt="CXC Software" width={77} height={40} loading="eager" style={{ height: '40px', width: 'auto', display: 'block' }} />
+          </Link>
+        </div>
 
         <div className="cxc-nav-desktop">
           {links.map((link) => (
-            <a key={link.href} href={link.href} style={{ fontSize: '14px', fontWeight: 500, color: '#3A3552' }}>
+            <Link key={link.href} href={link.href} style={{ fontSize: '14px', fontWeight: 700, color: '#3A3552' }}>
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        <div className="cxc-hide-mobile" style={{
-          alignItems: 'center',
-          gap: '2px',
-          background: '#F1EDF8',
-          padding: '3px',
-          borderRadius: '9px',
-        }}>
-          <button onClick={() => setLang('ro')} style={isRo ? btnOn : btnOff}>RO</button>
-          <button onClick={() => setLang('en')} style={isRo ? btnOff : btnOn}>EN</button>
+        <div className="cxc-nav-side cxc-nav-right">
+          <div className="cxc-hide-mobile" style={{
+            alignItems: 'center',
+            gap: '2px',
+            background: '#F1EDF8',
+            padding: '3px',
+            borderRadius: '9px',
+          }}>
+            <button onClick={() => setLang('ro')} style={isRo ? btnOn : btnOff}>RO</button>
+            <button onClick={() => setLang('en')} style={isRo ? btnOff : btnOn}>EN</button>
+          </div>
+
+          <Link href="/#contact" className="cxc-nav-cta-desktop" style={{
+            alignItems: 'center',
+            gap: '6px',
+            background: '#5B2589',
+            color: '#fff',
+            fontSize: '14px',
+            fontWeight: 600,
+            padding: '10px 18px',
+            borderRadius: '9px',
+            whiteSpace: 'nowrap',
+          }}>
+            {t.nav.cta}
+            <HiArrowRight size={14} aria-hidden />
+          </Link>
+
+          <button
+            type="button"
+            className="cxc-nav-toggle"
+            aria-label={open ? 'Închide meniul' : 'Deschide meniul'}
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <HiXMark size={22} /> : <HiBars3 size={22} />}
+          </button>
         </div>
-
-        <a href="#contact" className="cxc-nav-cta-desktop" style={{
-          alignItems: 'center',
-          gap: '6px',
-          background: '#5B2589',
-          color: '#fff',
-          fontSize: '14px',
-          fontWeight: 600,
-          padding: '10px 18px',
-          borderRadius: '9px',
-          whiteSpace: 'nowrap',
-        }}>
-          {t.nav.cta}
-          <HiArrowRight size={14} aria-hidden />
-        </a>
-
-        <button
-          type="button"
-          className="cxc-nav-toggle"
-          aria-label={open ? 'Închide meniul' : 'Deschide meniul'}
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <HiXMark size={22} /> : <HiBars3 size={22} />}
-        </button>
       </nav>
 
       <div className={`cxc-nav-mobile${open ? ' open' : ''}`}>
         {links.map((link) => (
-          <a key={link.href} href={link.href} onClick={close}>{link.label}</a>
+          <Link key={link.href} href={link.href} onClick={close}>{link.label}</Link>
         ))}
         <div className="cxc-nav-mobile-actions">
           <div style={{
@@ -114,7 +119,7 @@ export default function Navbar() {
             <button onClick={() => setLang('ro')} style={isRo ? btnOn : btnOff}>RO</button>
             <button onClick={() => setLang('en')} style={isRo ? btnOff : btnOn}>EN</button>
           </div>
-          <a href="#contact" onClick={close} style={{
+          <Link href="/#contact" onClick={close} style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '6px',
@@ -127,7 +132,7 @@ export default function Navbar() {
           }}>
             {t.nav.cta}
             <HiArrowRight size={14} aria-hidden />
-          </a>
+          </Link>
         </div>
       </div>
     </div>

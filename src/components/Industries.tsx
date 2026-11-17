@@ -48,7 +48,7 @@ export default function Industries() {
   const { t } = useLanguage();
 
   return (
-    <section id="industries" className="cxc-section cxc-section-tight-bottom" style={{ background: '#F9F9FB' }}>
+    <section id="industries" className="cxc-section cxc-section-tight-bottom cxc-section-flush-top" style={{ background: '#F9F9FB' }}>
       <div className="cxc-wrap">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto' }}>

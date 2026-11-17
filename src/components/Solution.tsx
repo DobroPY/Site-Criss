@@ -65,7 +65,7 @@ export default function Solution() {
   const featureIcons = [TbTarget, TbShieldCheck, IoRocketOutline, TbHeadset] as const;
 
   return (
-    <section id="solution" className="cxc-section" style={{ background: '#fff' }}>
+    <section id="solution" className="cxc-section cxc-section-flush-top" style={{ background: '#fff' }}>
       <div className="cxc-wrap">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>

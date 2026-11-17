@@ -12,6 +12,8 @@ import {
   HiArrowRightCircle,
 } from 'react-icons/hi2';
 import { TbInfinity } from 'react-icons/tb';
+import { TECH_STACK } from '@/lib/techStack';
+import TechLogo from '@/components/TechLogo';
 
 const iconPurple = '#7A3AE3';
 
@@ -150,23 +152,6 @@ function DashboardMockup() {
   );
 }
 
-function ClientLogo({ name }: { name: string }) {
-  const styles: Record<string, React.CSSProperties> = {
-    TeraPlast: { fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: '15px', letterSpacing: '-0.02em', color: '#9A94B0' },
-    LEONI: { fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: '16px', letterSpacing: '0.12em', color: '#9A94B0' },
-    Vestra: { fontFamily: "'Instrument Sans', sans-serif", fontWeight: 600, fontSize: '16px', fontStyle: 'italic', color: '#9A94B0' },
-    Electrogrup: { fontFamily: "'Instrument Sans', sans-serif", fontWeight: 700, fontSize: '14px', letterSpacing: '0.04em', color: '#9A94B0' },
-    'Amicii Building': { fontFamily: "'Instrument Sans', sans-serif", fontWeight: 600, fontSize: '13px', color: '#9A94B0' },
-    'NORD CONFOREST': { fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: '12px', letterSpacing: '0.08em', color: '#9A94B0' },
-  };
-
-  return (
-    <div style={{ ...styles[name], opacity: 0.7, whiteSpace: 'nowrap' }}>
-      {name}
-    </div>
-  );
-}
-
 export default function Hero() {
   const { t } = useLanguage();
   const trustIcons = [HiBolt, HiShieldCheck, HiLockClosed] as const;
@@ -272,7 +257,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Trusted by */}
+      {/* Tech stack */}
       <div className="cxc-wrap cxc-hero-sub">
         <div style={{
           textAlign: 'center',
@@ -281,16 +266,10 @@ export default function Hero() {
           letterSpacing: '0.14em',
           color: '#9A94B0',
           marginBottom: '28px',
-        }}>{t.hero.trustedBy}</div>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '40px 56px',
-        }}>
-          {t.hero.clients.map((name) => (
-            <ClientLogo key={name} name={name} />
+        }}>{t.hero.techStack}</div>
+        <div className="cxc-tech-grid">
+          {TECH_STACK.map((tech) => (
+            <TechLogo key={tech.name} {...tech} />
           ))}
         </div>
       </div>

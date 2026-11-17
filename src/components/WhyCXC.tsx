@@ -4,6 +4,8 @@ import { HiRocketLaunch, HiUsers, HiCalendar, HiShieldCheck } from 'react-icons/
 import { TbMapPin } from 'react-icons/tb';
 import type { IconType } from 'react-icons';
 import { useLanguage } from '@/context/LanguageContext';
+import { TECH_STACK } from '@/lib/techStack';
+import TechLogo from '@/components/TechLogo';
 
 const purple = '#7A3AE3';
 const purpleDark = '#5B2589';
@@ -99,15 +101,14 @@ export default function WhyCXC() {
           })}
         </div>
 
-        {/* Trust bar */}
-        <div className="cxc-trust-bar" style={{
+        {/* Trust card: partner blurb on top, tech stack grid below */}
+        <div className="cxc-trust-card" style={{
           marginTop: '28px',
           background: '#F7F5FB',
           borderRadius: '14px',
           border: '1px solid #EDE8F4',
-          padding: '22px 28px',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: '1 1 260px' }}>
+          <div className="cxc-trust-head">
             <div style={{
               width: '44px',
               height: '44px',
@@ -126,19 +127,13 @@ export default function WhyCXC() {
             </div>
           </div>
 
-          <div className="cxc-bar-divider" style={{ width: '1px', height: '40px', background: '#DDD6EA', flexShrink: 0 }} />
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap', flex: '1 1 400px' }}>
-            <span style={{ fontSize: '13px', color: '#8A83A0', whiteSpace: 'nowrap' }}>{t.why.trustLabel}</span>
-            {t.why.clients.map((name) => (
-              <span key={name} style={{
-                fontFamily: "'Sora', sans-serif",
-                fontWeight: 600,
-                fontSize: '13px',
-                color: '#9A94B0',
-                opacity: 0.85,
-              }}>{name}</span>
-            ))}
+          <div style={{ borderTop: '1px solid #E6E0F0', marginTop: '20px', paddingTop: '18px' }}>
+            <div style={{ fontSize: '13px', color: '#8A83A0', marginBottom: '14px', textAlign: 'center' }}>{t.why.trustLabel}</div>
+            <div className="cxc-trust-tech-grid">
+              {TECH_STACK.map((tech) => (
+                <TechLogo key={tech.name} {...tech} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

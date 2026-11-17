@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,8 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ro" style={{ scrollBehavior: 'smooth' }}>
-      <body>{children}</body>
+    // data-scroll-behavior: smooth for in-page anchors, but instant jumps when changing pages.
+    <html lang="ro" style={{ scrollBehavior: 'smooth' }} data-scroll-behavior="smooth">
+      <body>
+        {/* Shared by every page so the RO/EN choice survives navigation. */}
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }
